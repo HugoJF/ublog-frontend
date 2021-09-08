@@ -1,22 +1,11 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
-import {KatexOptions} from 'ngx-markdown';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-post-demo',
+  templateUrl: './post-demo.component.html'
 })
-export class AppComponent {
-  title = 'ublog-frontend';
-  options: KatexOptions = {
-    displayMode: true,
-    throwOnError: false,
-    errorColor: '#cc0000',
-  };
-  @ViewChild('editor') editor!: ElementRef<HTMLTextAreaElement>;
-
-  content = `
-# In somni referat solent opus *nuper* oraque
+export class PostDemoComponent implements OnInit {
+  content = `# In somni referat solent opus *nuper* oraque
 
 ## Una ipse
 
@@ -81,4 +70,11 @@ tenuisse posset Romuleos cervice. Deus simul [de canisve
 arboreis](http://www.vultu.org/), carmine si alas ducere spernit exstinctum
 dicimus magne; cvrrvs cuncta, et aede! Polumque docuisse fracta, umero, hic, o
 fatemur ab adducto.`
+
+  constructor() {
+  }
+
+  ngOnInit(): void {
+  }
+
 }

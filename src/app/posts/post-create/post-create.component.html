@@ -1,0 +1,43 @@
+<main class="flex flex-col h-screen">
+  <div class="my-8">
+    <!-- Meta -->
+    <h2 class="my-0 text-sm text-gray-700 text-center tracking-tight">Hugo Jeller - 03 de setembro de 2021</h2>
+    <h1 class="my-0 mb-3 text-5xl text-gray-900 text-center font-head font-black tracking-wide">
+      Utilizando npm com Linux
+    </h1>
+
+    <!-- Tags -->
+    <div class="flex justify-center">
+      <a href="#" class="mx-1 text-gray-700 hover:text-gray-800 font-bold font-mono cursor-pointer">//npm</a>
+      <a href="#" class="mx-1 text-gray-700 hover:text-gray-800 font-bold font-mono cursor-pointer">//linux</a>
+      <a href="#" class="mx-1 text-gray-700 hover:text-gray-800 font-bold font-mono cursor-pointer">//tutorial</a>
+    </div>
+  </div>
+
+  <div class="flex py-4">
+    <div class="flex px-5 py-3 items-center space-x-2">
+      <input class="peer sr-only" type="checkbox">
+      <span>Público</span>
+    </div>
+    <input class="w-full px-5 py-3" type="text" value="utilizando-npm-com-linux">
+    <button (click)="create()" class="px-5 py-3 bg-blue-500 text-white">Salvar</button>
+  </div>
+
+  <!-- Editor -->
+  <div class="flex-grow grid grid-cols-2 gap-8 h-64">
+    <div class="overflow-auto">
+      <ngx-codemirror
+        [(ngModel)]="content"
+        [options]="{
+        lineNumbers: true,
+        mode: 'markdown',
+        theme: 'dracula'
+      }"
+      ></ngx-codemirror>
+    </div>
+
+    <div class="overflow-auto">
+      <app-markdown [data]="content"></app-markdown>
+    </div>
+  </div>
+</main>
