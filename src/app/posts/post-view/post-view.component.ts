@@ -1,18 +1,22 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Post} from "../../types/posts";
 import {PostsService} from "../posts.service";
-import {switchMap} from "rxjs/operators";
+import {map, switchMap, take} from "rxjs/operators";
 
 @Component({
   selector: 'app-post-view',
   templateUrl: './post-view.component.html'
 })
 export class PostViewComponent implements OnInit {
+  slug!: string;
+
   post$!: Observable<Post>;
   versions$!: Observable<{ versions: string[] }>;
+
+  refetchPost = new BehaviorSubject<number>(0);
 
   constructor(
     private http: HttpClient,
@@ -23,20 +27,24 @@ export class PostViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const slug = this.route.snapshot.paramMap.get('slug');
+    this.slug = this.route.snapshot.paramMap.get('slug')!;
 
-    if (!slug) {
-      this.router.navigateByUrl('/posts/write');
+    this.route.queryParams.pipe(
+      map(qs => qs['version'] ?? 0),
+    ).subscribe(this.refetchPost);
 
-      return;
-    }
+    this.versions$ = this.posts.versions(this.slug);
+    this.post$ = this.refetchPost.pipe(
+      switchMap(version => this.posts.get(this.slug, version))
+    );
+  }
 
-    // TODO: refactor
-    this.route.queryParams.subscribe((qs) => {
-      this.post$ = this.posts.get(slug, qs['version']);
-    });
-
-    this.post$ = this.posts.get(slug);
-    this.versions$ = this.posts.versions(slug);
+  commit(version: number) {
+    this.posts
+      .rollBack(this.slug, version)
+      .pipe(take(1))
+      .subscribe(() => {
+        this.router.navigateByUrl(location.pathname);
+      });
   }
 }

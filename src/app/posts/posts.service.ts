@@ -11,6 +11,10 @@ export class PostsService {
   constructor(private http: HttpClient) {
   }
 
+  rollBack(slug: string, version: number) {
+    return this.http.put(`${environment.baseUrl}/posts/${slug}/versions/${version}`, {});
+  }
+
   versions(slug: string) {
     return this.http.get<{versions: string[]}>(`${environment.baseUrl}/posts/${slug}/versions`);
   }
