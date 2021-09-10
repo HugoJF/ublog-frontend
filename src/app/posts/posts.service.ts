@@ -11,12 +11,22 @@ export class PostsService {
   constructor(private http: HttpClient) {
   }
 
+  versions(slug: string) {
+    return this.http.get<{versions: string[]}>(`${environment.baseUrl}/posts/${slug}/versions`);
+  }
+
   store(post: PostProperties) {
     return this.http.post(`${environment.baseUrl}/posts`, post);
   }
 
-  get(slug: string) {
-    return this.http.get<Post>(`${environment.baseUrl}/posts/${slug}`);
+  get(slug: string, version?: number|string) {
+    if (version) {
+      const v = version.toString().replace(/[a-zA-Z]/, '');
+
+      return this.http.get<Post>(`${environment.baseUrl}/posts/${slug}/versions/${v}`);
+    } else {
+      return this.http.get<Post>(`${environment.baseUrl}/posts/${slug}`);
+    }
   }
 
   index(key: string | undefined) {

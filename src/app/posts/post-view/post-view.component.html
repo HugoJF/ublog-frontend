@@ -1,4 +1,4 @@
-<ng-container *ngIf="content$ | async as content">
+<ng-container *ngIf="post$ | async as content">
   <main class="flex flex-col h-screen">
     <router-outlet></router-outlet>
     <div class="my-8">
@@ -7,6 +7,16 @@
       <h1 class="my-0 mb-3 text-5xl text-gray-900 text-center font-head font-black tracking-wide">
         {{content.title}}
       </h1>
+      <ul class="flex justify-center list-none">
+        <li
+          *ngFor="let version of (versions$ |async)?.versions"
+          routerLink="/posts/{{content.slug}}"
+          [queryParams]="{version: version}"
+          class="duration-150 px-3 py-2 hover:bg-gray-100 cursor-pointer rounded"
+        >
+          {{version}}
+        </li>
+      </ul>
 
       <!--      &lt;!&ndash; Tags &ndash;&gt;-->
       <!--      <div class="flex justify-center">-->
