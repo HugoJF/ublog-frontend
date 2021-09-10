@@ -1,0 +1,13 @@
+<main class="container mx-auto cursor-pointer">
+  <h1>Posts</h1>
+  <div
+    *ngFor="let post of posts$ | async"
+    routerLink="/posts/{{post.slug}}"
+    class="group"
+  >
+    <h2 class="text-3xl group-hover:underline">{{post.title}}</h2>
+    <p>Aprenda a instalar o npm em qualquer sistema operacional Linux de forma fácil e simples</p>
+    <small class="text-base text-gray-700 tracking-tight">Por Hugo Jeller • 9 de setembro, 2021</small>
+  </div>
+
+</main>

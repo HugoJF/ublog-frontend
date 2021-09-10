@@ -8,12 +8,16 @@ import {CodemirrorModule} from "@ctrl/ngx-codemirror";
 import {FormsModule} from "@angular/forms";
 import {PostDemoComponent} from './post-demo/post-demo.component';
 import {SharedModule} from "../shared/shared.module";
+import { PostListComponent } from './post-list/post-list.component';
+import { PostsIndexComponent } from './posts-index/posts-index.component';
 
 @NgModule({
   declarations: [
     PostViewComponent,
     PostCreateComponent,
-    PostDemoComponent
+    PostDemoComponent,
+    PostListComponent,
+    PostsIndexComponent
   ],
   imports: [
     CommonModule,

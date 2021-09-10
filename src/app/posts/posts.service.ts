@@ -18,4 +18,9 @@ export class PostsService {
   get(slug: string) {
     return this.http.get<Post>(`${environment.baseUrl}/posts/${slug}`);
   }
+
+  index(key: string | undefined) {
+    const options = key ? {params: {key}} : {};
+    return this.http.get<Post[]>(`${environment.baseUrl}/posts`, options);
+  }
 }

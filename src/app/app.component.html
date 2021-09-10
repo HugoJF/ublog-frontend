@@ -1,3 +1,32 @@
+<header class="w-full bg-gray-800 text-gray-100 shadow">
+  <div class="flex items-center container mx-auto space-x-8">
+    <a class="text-xl font-black">
+      <span class="font-normal text-gray-200">µ</span>
+      <span>blog</span>
+    </a>
+    <ul class="flex list-none">
+      <li
+        class="duration-150 py-6 px-6 mx-0 text-xl hover:text-white hover:bg-gray-700 cursor-pointer"
+        routerLink="/"
+      >
+        home
+      </li>
+      <li
+        class="duration-150 py-6 px-6 mx-0 text-xl hover:text-white hover:bg-gray-700 cursor-pointer"
+        routerLink="/posts"
+      >
+        posts
+      </li>
+      <li
+        class="duration-150 py-6 px-6 mx-0 text-xl hover:text-white hover:bg-gray-700 cursor-pointer"
+        routerLink="/posts/write"
+      >
+        write
+      </li>
+    </ul>
+  </div>
+</header>
+
 <main class="flex flex-col h-screen">
   <router-outlet></router-outlet>
 </main>
