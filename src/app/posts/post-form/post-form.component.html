@@ -1,0 +1,27 @@
+<div class="flex justify-center my-8">
+  <!-- Meta -->
+  <input [formControl]="control('title')" class="my-0 mb-3 text-5xl text-gray-900 text-center font-head font-black tracking-wide"/>
+</div>
+
+<div class="flex">
+  <input [formControl]="control('slug')" class="w-full px-5 py-3" type="text" value="utilizando-npm-com-linux">
+  <button (click)="onSubmit()" class="px-5 py-3 bg-blue-500 text-white">publish</button>
+</div>
+
+<!-- Editor -->
+<div class="flex-grow grid grid-cols-2 gap-8 h-64">
+  <div class="overflow-auto">
+    <ngx-codemirror
+      [formControl]="control('body')"
+      [options]="{
+        lineNumbers: true,
+        mode: 'markdown',
+        theme: 'dracula'
+      }"
+    ></ngx-codemirror>
+  </div>
+
+  <div class="overflow-auto">
+    <app-markdown [data]="control('body').value"></app-markdown>
+  </div>
+</div>

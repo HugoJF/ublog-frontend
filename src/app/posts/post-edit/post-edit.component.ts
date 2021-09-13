@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {KatexOptions} from "ngx-markdown";
-import {HttpClient} from "@angular/common/http";
-import {ActivatedRoute, Router} from "@angular/router";
-import {PostsService} from "../posts.service";
+import {Post} from "../../types/posts";
 import {FormControl, FormGroup} from "@angular/forms";
+import {ActivatedRoute, Router} from "@angular/router";
+import {HttpClient} from "@angular/common/http";
+import {PostsService} from "../posts.service";
 
 @Component({
-  selector: 'app-post-create',
-  templateUrl: './post-create.component.html'
+  selector: 'app-post-edit',
+  templateUrl: './post-edit.component.html'
 })
-export class PostCreateComponent implements OnInit {
+export class PostEditComponent implements OnInit {
   title = new FormControl('');
   slug = new FormControl('');
   body = new FormControl('');

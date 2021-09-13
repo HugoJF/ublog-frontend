@@ -4,6 +4,7 @@ import {PostViewComponent} from "./post-view/post-view.component";
 import {PostCreateComponent} from "./post-create/post-create.component";
 import {PostDemoComponent} from "./post-demo/post-demo.component";
 import {PostsIndexComponent} from "./posts-index/posts-index.component";
+import {PostEditComponent} from "./post-edit/post-edit.component";
 
 const routes: Routes = [
   {
@@ -17,6 +18,9 @@ const routes: Routes = [
   },
   {
     path: ':slug', component: PostViewComponent,
+  },
+  {
+    path: ':slug/edit', component: PostEditComponent,
   },
 ];
 

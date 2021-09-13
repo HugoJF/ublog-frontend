@@ -19,14 +19,8 @@
         </li>
 
         <button class="duration-150 px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white" (click)="commit(content.version)">commit</button>
+        <button routerLink="/posts/{{slug}}/edit" class="duration-150 px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white">edit</button>
       </ul>
-
-      <!--      &lt;!&ndash; Tags &ndash;&gt;-->
-      <!--      <div class="flex justify-center">-->
-      <!--        <a href="#" class="mx-1 text-gray-700 hover:text-gray-800 font-bold font-mono cursor-pointer">//npm</a>-->
-      <!--        <a href="#" class="mx-1 text-gray-700 hover:text-gray-800 font-bold font-mono cursor-pointer">//linux</a>-->
-      <!--        <a href="#" class="mx-1 text-gray-700 hover:text-gray-800 font-bold font-mono cursor-pointer">//tutorial</a>-->
-      <!--      </div>-->
     </div>
 
     <!-- Markdown -->
