@@ -5,6 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import {Post} from "../../types/posts";
 import {PostsService} from "../posts.service";
 import {map, switchMap, take} from "rxjs/operators";
+import {Tag} from "../../types/tags";
 
 @Component({
   selector: 'app-post-view',
@@ -14,6 +15,7 @@ export class PostViewComponent implements OnInit {
   slug!: string;
 
   post$!: Observable<Post>;
+  tags$!: Observable<Tag[]>;
   versions$!: Observable<{ versions: string[] }>;
 
   refetchPost = new BehaviorSubject<number>(0);
@@ -37,6 +39,9 @@ export class PostViewComponent implements OnInit {
     this.post$ = this.refetchPost.pipe(
       switchMap(version => this.posts.get(this.slug, version))
     );
+    this.tags$ = this.refetchPost.pipe(
+      switchMap(() => this.posts.tags(this.slug))
+    )
   }
 
   commit(version: number) {

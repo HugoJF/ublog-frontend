@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Post, PostProperties} from "../types/posts";
 import {environment} from '../../environments/environment';
+import {Tag} from "../types/tags";
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +37,9 @@ export class PostsService {
   index(key: string | undefined) {
     const options = key ? {params: {key}} : {};
     return this.http.get<Post[]>(`${environment.baseUrl}/posts`, options);
+  }
+
+  tags(slug: string) {
+    return this.http.get<Tag[]>(`${environment.baseUrl}/posts/${slug}/tags`);
   }
 }
