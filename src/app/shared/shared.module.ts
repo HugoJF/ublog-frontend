@@ -4,11 +4,13 @@ import {MarkdownComponent} from "./markdown/markdown.component";
 import {MarkdownModule} from "ngx-markdown";
 import { TagListComponent } from './tag-list/tag-list.component';
 import {RouterModule} from "@angular/router";
+import { FieldWrapperComponent } from './field-wrapper/field-wrapper.component';
 
 @NgModule({
   declarations: [
     MarkdownComponent,
-    TagListComponent
+    TagListComponent,
+    FieldWrapperComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import {RouterModule} from "@angular/router";
   ],
     exports: [
         MarkdownComponent,
-        TagListComponent
+        TagListComponent,
+        FieldWrapperComponent
     ],
 })
 export class SharedModule { }

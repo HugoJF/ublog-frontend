@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Post} from "../../types/posts";
 import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({

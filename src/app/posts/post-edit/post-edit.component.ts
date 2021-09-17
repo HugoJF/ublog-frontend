@@ -33,7 +33,10 @@ export class PostEditComponent implements OnInit {
 
     this.posts.get(slug).subscribe(post => {
       this.form.setValue(post);
+      // TODO: test
+      this.form.get('slug')?.disable();
     })
+
   }
 
   submit() {

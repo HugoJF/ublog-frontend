@@ -12,6 +12,7 @@ import { PostListComponent } from './post-list/post-list.component';
 import { PostsIndexComponent } from './posts-index/posts-index.component';
 import { PostFormComponent } from './post-form/post-form.component';
 import { PostEditComponent } from './post-edit/post-edit.component';
+import {NgEmptyPipeModule} from "angular-pipes";
 
 @NgModule({
   declarations: [
@@ -23,15 +24,16 @@ import { PostEditComponent } from './post-edit/post-edit.component';
     PostFormComponent,
     PostEditComponent
   ],
-    imports: [
-        CommonModule,
-        PostsRoutingModule,
-        MarkdownModule,
-        CodemirrorModule,
-        FormsModule,
-        SharedModule,
-        ReactiveFormsModule,
-    ]
+  imports: [
+    CommonModule,
+    PostsRoutingModule,
+    MarkdownModule,
+    CodemirrorModule,
+    FormsModule,
+    SharedModule,
+    ReactiveFormsModule,
+    NgEmptyPipeModule,
+  ]
 })
 export class PostsModule {
 }

@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {KatexOptions} from "ngx-markdown";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PostsService} from "../posts.service";
 import {FormControl, FormGroup} from "@angular/forms";
+import {iif, of} from "rxjs";
+import {map, mergeMap} from "rxjs/operators";
 
 @Component({
   selector: 'app-post-create',
@@ -31,8 +32,17 @@ export class PostCreateComponent implements OnInit {
   ngOnInit(): void {
     const slug = this.route.snapshot.paramMap.get('slug')!;
 
+    // Fill defaults
     this.posts.get(slug).subscribe(post => {
       this.form.setValue(post);
+    })
+
+    // Automatically generate slug from title
+    this.title.valueChanges.pipe(
+      mergeMap(v => iif(() => this.slug.pristine, of(v))),
+      map(v => v.toString().toLowerCase().replace(/[^a-z0-9]/g, '-'))
+    ).subscribe(values => {
+      this.slug.setValue(values)
     })
   }
 
