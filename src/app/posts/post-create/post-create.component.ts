@@ -14,11 +14,15 @@ export class PostCreateComponent implements OnInit {
   title = new FormControl('');
   slug = new FormControl('');
   body = new FormControl('');
+  abstract = new FormControl('');
+  public = new FormControl(true);
 
   form = new FormGroup({
     title: this.title,
     slug: this.slug,
     body: this.body,
+    abstract: this.abstract,
+    public: this.public,
   });
 
   constructor(
