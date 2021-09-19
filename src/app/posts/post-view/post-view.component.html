@@ -14,24 +14,24 @@
       ></app-tags>
 
       <!-- Versions -->
-      <ul class="flex justify-center items-center space-x-4 list-none">
-        <li
-          *ngFor="let version of (versions$ |async)?.versions"
-          routerLink="/posts/{{post.slug}}"
-          [queryParams]="{version: version}"
-          class="duration-150 m-0 px-3 py-2 hover:bg-gray-100 cursor-pointer select-none"
-          [class.bg-gray-100]="post.version === +version"
-        >
-          {{version}}
-        </li>
+<!--      <ul class="flex justify-center items-center space-x-4 list-none">-->
+<!--        <li-->
+<!--          *ngFor="let version of (versions$ |async)?.versions"-->
+<!--          routerLink="/posts/{{post.slug}}"-->
+<!--          [queryParams]="{version: version}"-->
+<!--          class="duration-150 m-0 px-3 py-2 hover:bg-gray-100 cursor-pointer select-none"-->
+<!--          [class.bg-gray-100]="post.version === +version"-->
+<!--        >-->
+<!--          {{version}}-->
+<!--        </li>-->
 
-        <button class="duration-150 px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white"
-                (click)="commit(post.version)">commit
-        </button>
-        <button routerLink="/posts/{{slug}}/edit"
-                class="duration-150 px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white">edit
-        </button>
-      </ul>
+<!--        <button class="duration-150 px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white"-->
+<!--                (click)="commit(post.version)">commit-->
+<!--        </button>-->
+<!--        <button routerLink="/posts/{{slug}}/edit"-->
+<!--                class="duration-150 px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white">edit-->
+<!--        </button>-->
+<!--      </ul>-->
     </div>
 
     <!-- Markdown -->
