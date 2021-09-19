@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Post} from "../../types/posts";
-import {TagsService} from "../../posts/tags.service";
+import {TagsService} from "../../tags/tags.service";
 import {BehaviorSubject, Observable} from "rxjs";
 import {Tag} from "../../types/tags";
 import {PostsService} from "../../posts/posts.service";

@@ -16,4 +16,8 @@ export class TagsService {
   tags() {
     return this.http.get<Tag[]>(`${environment.baseUrl}/tags`);
   }
+
+  postsByTag(slug: string) {
+    // TODO
+  }
 }
