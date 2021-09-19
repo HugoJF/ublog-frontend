@@ -17,14 +17,14 @@ export class PostsService {
   }
 
   versions(slug: string) {
-    return this.http.get<{versions: string[]}>(`${environment.baseUrl}/posts/${slug}/versions`);
+    return this.http.get<{ versions: string[] }>(`${environment.baseUrl}/posts/${slug}/versions`);
   }
 
   store(post: PostProperties) {
     return this.http.post(`${environment.baseUrl}/posts`, post);
   }
 
-  get(slug: string, version?: number|string) {
+  get(slug: string, version?: number | string) {
     if (version) {
       const v = version.toString().replace(/[a-zA-Z]/, '');
 
@@ -41,5 +41,13 @@ export class PostsService {
 
   tags(slug: string) {
     return this.http.get<Tag[]>(`${environment.baseUrl}/posts/${slug}/tags`);
+  }
+
+  tagPost(postSlug: string, tagSlug: string) {
+    return this.http.post(`${environment.baseUrl}/posts/${postSlug}/tag/${tagSlug}`, {});
+  }
+
+  untagPost(postSlug: string, tagSlug: string) {
+    return this.http.delete(`${environment.baseUrl}/posts/${postSlug}/tag/${tagSlug}`, {});
   }
 }

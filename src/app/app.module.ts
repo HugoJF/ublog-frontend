@@ -1,13 +1,11 @@
-import {NgModule, SecurityContext} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {MarkdownModule} from 'ngx-markdown';
 import {FormsModule} from '@angular/forms';
 import {CodemirrorModule} from '@ctrl/ngx-codemirror';
-import {HttpClient, HttpClientModule} from "@angular/common/http";
-import { MarkdownComponent } from './shared/markdown/markdown.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [

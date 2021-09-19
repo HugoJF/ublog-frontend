@@ -1,0 +1,37 @@
+<ul
+  class="flex space-x-4 justify-center"
+  *ngIf="postTags$ | async as postTags"
+>
+  <li
+    *ngFor="let tag of postTags"
+    class="px-3 py-1 text-white text-sm bg-blue-500 rounded-full"
+    routerLink="/tags/{{tag.slug}}"
+  >
+    {{tag.name}}
+  </li>
+
+  <li
+    class="relative w-[28px] py-1 flex justify-center items-center text-white text-sm bg-blue-500 rounded-full select-none cursor-pointer"
+    (click)="toggleTagMenu()"
+  >
+    +
+    <ul
+      *ngIf="tagMenuOpen"
+      class="absolute top-full left-full text-black bg-white border rounded-lg divide-y shadow overflow-hidden"
+    >
+      <ng-container *ngIf="tags$ | async as tags">
+        <li
+          *ngFor="let tag of tags"
+          (click)="addTag(tag.slug)"
+          [ngClass]="{
+            'bg-blue-500 text-white hover:bg-blue-600': hasTag(tag.slug),
+            'hover:bg-gray-50': !hasTag(tag.slug)
+          }"
+          class="px-5 py-2 duration-150 hover:bg-gray-50 cursor-pointer"
+        >
+          {{tag.name}}
+        </li>
+      </ng-container>
+    </ul>
+  </li>
+</ul>

@@ -3,7 +3,8 @@ import {KatexOptions} from "ngx-markdown";
 
 @Component({
   selector: 'app-markdown[data]',
-  templateUrl: './markdown.component.html'
+  templateUrl: './markdown.component.html',
+  host: {class: 'markdown-base'}
 })
 export class MarkdownComponent {
   @Input() data: string = '';

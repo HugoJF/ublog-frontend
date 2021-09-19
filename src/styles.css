@@ -19,43 +19,43 @@ a[href] {
   @apply text-2xl
 }
 
-h1  {
+.markdown-base h1  {
   @apply text-4xl my-8
 }
 
-h2 {
+.markdown-base h2 {
   @apply text-3xl my-6
 }
 
-h3 {
+.markdown-base h3 {
   @apply text-2xl my-4
 }
 
-h4 {
+.markdown-base h4 {
   @apply text-xl my-3
 }
 
-h5 {
+.markdown-base h5 {
   @apply text-lg my-2
 }
 
-h6 {
+.markdown-base h6 {
   @apply text-base my-1
 }
 
-ul {
+.markdown-base ul {
   @apply list-disc
 }
 
-ol {
+.markdown-base ol {
   @apply list-decimal
 }
 
-li {
+.markdown-base li {
   @apply ml-6
 }
 
-p {
+.markdown-base p {
   @apply my-4
 }
 

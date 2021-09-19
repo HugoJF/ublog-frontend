@@ -1,33 +1,32 @@
-<ng-container *ngIf="post$ | async as content">
+<ng-container *ngIf="post$ | async as post">
   <main class="flex flex-col items-center h-screen">
     <router-outlet></router-outlet>
     <div class="my-8">
       <!-- Meta -->
       <h2 class="my-0 text-sm text-gray-700 text-center tracking-tight">Hugo Jeller - 03 de setembro de 2021</h2>
       <h1 class="my-0 mb-3 text-5xl text-gray-900 text-center font-head font-black tracking-wide">
-        {{content.title}}
+        {{post.title}}
       </h1>
 
       <!-- Tags -->
-      <app-tag-list
-        *ngIf="tags$ | async as tags"
-        [tags]="tags"
-      ></app-tag-list>
+      <app-tags
+        [post]="post"
+      ></app-tags>
 
       <!-- Versions -->
       <ul class="flex justify-center items-center space-x-4 list-none">
         <li
           *ngFor="let version of (versions$ |async)?.versions"
-          routerLink="/posts/{{content.slug}}"
+          routerLink="/posts/{{post.slug}}"
           [queryParams]="{version: version}"
           class="duration-150 m-0 px-3 py-2 hover:bg-gray-100 cursor-pointer select-none"
-          [class.bg-gray-100]="+content.version === +version"
+          [class.bg-gray-100]="post.version === +version"
         >
           {{version}}
         </li>
 
         <button class="duration-150 px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white"
-                (click)="commit(content.version)">commit
+                (click)="commit(post.version)">commit
         </button>
         <button routerLink="/posts/{{slug}}/edit"
                 class="duration-150 px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white">edit
@@ -37,7 +36,7 @@
 
     <!-- Markdown -->
     <div class="flex-grow px-8 w-full grid grid-cols-1">
-      <app-markdown [data]="content.body"></app-markdown>
+      <app-markdown [data]="post.body"></app-markdown>
     </div>
   </main>
 
