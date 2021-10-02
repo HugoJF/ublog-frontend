@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import {PostProperties} from "../types/posts";
-import {environment} from "../../environments/environment";
-import {HttpClient} from "@angular/common/http";
 import {Tag} from "../types/tags";
+import {ApiService} from "../api.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +8,11 @@ import {Tag} from "../types/tags";
 export class TagsService {
 
   constructor(
-    private readonly http: HttpClient
+    private readonly api: ApiService
   ) { }
 
   tags() {
-    return this.http.get<Tag[]>(`${environment.baseUrl}/tags`);
+    return this.api.get<Tag[]>(`/tags`);
   }
 
   postsByTag(slug: string) {

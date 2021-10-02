@@ -9,6 +9,7 @@ import {PostFormComponent} from "./post-form/post-form.component";
 import {CodemirrorModule} from "@ctrl/ngx-codemirror";
 import {ReactiveFormsModule} from "@angular/forms";
 import {TagsComponent} from "./tags/tags.component";
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {TagsComponent} from "./tags/tags.component";
     PostListComponent,
     PostFormComponent,
     TagsComponent,
+    ErrorComponent,
   ],
   imports: [
     CommonModule,
@@ -27,13 +29,14 @@ import {TagsComponent} from "./tags/tags.component";
       sanitize: SecurityContext.NONE
     }),
   ],
-  exports: [
-    MarkdownComponent,
-    FieldWrapperComponent,
-    PostListComponent,
-    PostFormComponent,
-    TagsComponent,
-  ],
+    exports: [
+        MarkdownComponent,
+        FieldWrapperComponent,
+        PostListComponent,
+        PostFormComponent,
+        TagsComponent,
+        ErrorComponent,
+    ],
 })
 export class SharedModule {
 }

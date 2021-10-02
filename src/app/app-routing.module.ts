@@ -9,6 +9,9 @@ const routes: Routes = [
     path: 'tags',
     loadChildren: () => import('./tags/tags.module').then(m => m.TagsModule)
   }, {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+  }, {
     path: '**',
     redirectTo: '/posts',
   }];

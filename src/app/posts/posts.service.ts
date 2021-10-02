@@ -1,53 +1,52 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {Post, PostProperties} from "../types/posts";
-import {environment} from '../../environments/environment';
 import {Tag} from "../types/tags";
+import {ApiService} from "../api.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostsService {
 
-  constructor(private http: HttpClient) {
+  constructor(private api: ApiService) {
   }
 
   rollBack(slug: string, version: number) {
-    return this.http.put(`${environment.baseUrl}/posts/${slug}/versions/${version}`, {});
+    return this.api.put(`/posts/${slug}/versions/${version}`, {});
   }
 
   versions(slug: string) {
-    return this.http.get<{ versions: string[] }>(`${environment.baseUrl}/posts/${slug}/versions`);
+    return this.api.get<{ versions: string[] }>(`/posts/${slug}/versions`);
   }
 
   store(post: PostProperties) {
-    return this.http.post(`${environment.baseUrl}/posts`, post);
+    return this.api.post(`/posts`, post);
   }
 
   get(slug: string, version?: number | string) {
     if (version) {
       const v = version.toString().replace(/[a-zA-Z]/, '');
 
-      return this.http.get<Post>(`${environment.baseUrl}/posts/${slug}/versions/${v}`);
+      return this.api.get<Post>(`/posts/${slug}/versions/${v}`);
     } else {
-      return this.http.get<Post>(`${environment.baseUrl}/posts/${slug}`);
+      return this.api.get<Post>(`/posts/${slug}`);
     }
   }
 
   index(key: string | undefined) {
     const options = key ? {params: {key}} : {};
-    return this.http.get<Post[]>(`${environment.baseUrl}/posts`, options);
+    return this.api.get<Post[]>(`/posts`, options);
   }
 
   tags(slug: string) {
-    return this.http.get<Tag[]>(`${environment.baseUrl}/posts/${slug}/tags`);
+    return this.api.get<Tag[]>(`/posts/${slug}/tags`);
   }
 
   tagPost(postSlug: string, tagSlug: string) {
-    return this.http.post(`${environment.baseUrl}/posts/${postSlug}/tag/${tagSlug}`, {});
+    return this.api.post(`posts/${postSlug}/tag/${tagSlug}`, {});
   }
 
   untagPost(postSlug: string, tagSlug: string) {
-    return this.http.delete(`${environment.baseUrl}/posts/${postSlug}/tag/${tagSlug}`, {});
+    return this.api.delete(`/posts/${postSlug}/tag/${tagSlug}`, {});
   }
 }
