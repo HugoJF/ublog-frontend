@@ -36,12 +36,20 @@ export class LoginComponent implements OnInit {
     this.error = false;
     this.loading = true;
 
-    this.auth.login(this.form.value).pipe(
-      tap(() => this.loading = false),
-      switchMap(v => iif(() => v === undefined, throwError(Error('Invalid credentials')), of(v))),
+    this.auth.login({
+      Username: this.username.value,
+      Password: this.password.value,
+    }).pipe(
+      tap(() => {
+        this.error = true;
+        this.loading = false;
+      }),
     ).subscribe(
       () => this.router.navigateByUrl('/'),
-      () => this.error = true,
+      () => {
+        this.error = true;
+        this.loading = false;
+      },
     )
   }
 }

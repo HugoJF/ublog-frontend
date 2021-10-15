@@ -5,6 +5,8 @@
 export const environment = {
   production: false,
   baseUrl: 'http://localhost:3000',
+  cognitoPoolId: 'us-east-1_Z5Cw4Zq7c',
+  cognitoClientId: 'v2ki29kbh7q9po090ti70nuo7',
 };
 
 /*

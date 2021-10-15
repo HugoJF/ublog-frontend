@@ -19,7 +19,7 @@ input:-webkit-autofill:active {
 
 @tailwind base;
 
-a[href] {
+.markdown a[href] {
   @apply text-blue-600 font-bold underline
 }
 

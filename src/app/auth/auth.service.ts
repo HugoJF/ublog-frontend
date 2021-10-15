@@ -1,27 +1,50 @@
 import {Injectable} from '@angular/core';
-import {LoginCredentials, LoginToken} from "../types/auth";
 import {environment} from "../../environments/environment";
-import {catchError, map, switchMap, take, tap} from "rxjs/operators";
-import {iif, of} from "rxjs";
-import {ApiService} from "../api.service";
+import {take, tap} from "rxjs/operators";
+import {from, ReplaySubject} from "rxjs";
+import * as AmazonCognitoIdentity from "amazon-cognito-identity-js";
+
+const {AuthenticationDetails, CognitoUserPool, CognitoUser} = AmazonCognitoIdentity;
+
+interface IAuthenticationDetailsData {
+  Username: string;
+  Password: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  public readonly authChanges = new ReplaySubject<boolean>();
 
-  constructor(
-    private readonly api: ApiService
-  ) {
+  logout() {
+    localStorage.removeItem('token');
+    this.authChanges.next(false);
   }
 
-  login(credentials: LoginCredentials) {
-    return this.api.post<LoginToken>(`/auth`, credentials).pipe(
+  login(credentials: IAuthenticationDetailsData) {
+    const authenticationDetails = new AuthenticationDetails(credentials);
+    const userPool = new CognitoUserPool({
+      UserPoolId: environment.cognitoPoolId,
+      ClientId: environment.cognitoClientId,
+    });
+
+    const cognitoUser = new CognitoUser({
+      Username: credentials.Username,
+      Pool: userPool,
+    });
+
+    const promise = new Promise<string>(((resolve, reject) => {
+      cognitoUser.authenticateUser(authenticationDetails, {
+        onSuccess: result => resolve(result.getAccessToken().getJwtToken()),
+        onFailure: err => reject(err),
+      });
+    }))
+
+    return from(promise).pipe(
       take(1),
-      switchMap(v => iif(() => typeof v.token === 'string', of(v), of({token: undefined}))),
-      catchError(() => of({token: undefined})),
-      map(v => v.token),
-      tap(value => this.handleToken(value))
+      tap(() => this.authChanges.next(true), () => this.authChanges.next(false)),
+      tap(value => this.handleToken(value)),
     );
   }
 
@@ -29,12 +52,11 @@ export class AuthService {
     return Boolean(localStorage.getItem('token'));
   }
 
-  private handleToken(value: string | undefined) {
+  private handleToken(value: string) {
     if (value) {
       localStorage.setItem('token', value);
     } else {
       localStorage.removeItem('token');
     }
   }
-
 }
