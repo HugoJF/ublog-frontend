@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Post} from "../../types/posts";
 import {FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
@@ -46,6 +45,6 @@ export class PostEditComponent implements OnInit {
   submit() {
     this.posts.store(this.form.value).subscribe(() => {
       this.router.navigateByUrl(`/posts/${this.slug.value}`);
-    })
+    });
   }
 }

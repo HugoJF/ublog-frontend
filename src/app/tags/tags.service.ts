@@ -18,4 +18,11 @@ export class TagsService {
   postsByTag(slug: string) {
     // TODO
   }
+
+  createTag(tag: string) {
+    return this.api.post<Tag>(`/tags`, {
+      slug: tag.toLowerCase().replace(/[^a-zA-Z0-9-]/, ''),
+      name: tag
+    });
+  }
 }

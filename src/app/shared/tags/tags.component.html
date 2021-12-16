@@ -22,7 +22,7 @@
       <ng-container *ngIf="tags$ | async as tags">
         <li
           *ngFor="let tag of tags"
-          (click)="addTag(tag.slug)"
+          (click)="tagPost(tag.slug)"
           [ngClass]="{
             'bg-blue-500 text-white hover:bg-blue-600': hasTag(tag.slug),
             'hover:bg-gray-50': !hasTag(tag.slug)
@@ -30,6 +30,13 @@
           class="px-5 py-2 duration-150 hover:bg-gray-50 cursor-pointer"
         >
           {{tag.name}}
+        </li>
+        <hr>
+        <li
+          (click)="createTag()"
+          class="px-5 py-2 duration-150 hover:bg-gray-50 font-medium cursor-pointer whitespace-nowrap"
+        >
+          create new tag
         </li>
       </ng-container>
     </ul>

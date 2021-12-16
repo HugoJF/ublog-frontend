@@ -25,7 +25,7 @@ export class PostsService {
 
   get(slug: string, version?: number | string) {
     if (version) {
-      const v = version.toString().replace(/[a-zA-Z]/, '');
+      const v = version.toString().replace(/[^0-9]/, '');
 
       return this.api.get<Post>(`/posts/${slug}/versions/${v}`);
     } else {
@@ -35,6 +35,7 @@ export class PostsService {
 
   index(key: string | undefined) {
     const options = key ? {params: {key}} : {};
+
     return this.api.get<Post[]>(`/posts`, options);
   }
 
@@ -43,7 +44,7 @@ export class PostsService {
   }
 
   tagPost(postSlug: string, tagSlug: string) {
-    return this.api.post(`posts/${postSlug}/tag/${tagSlug}`, {});
+    return this.api.post(`/posts/${postSlug}/tag/${tagSlug}`, {});
   }
 
   untagPost(postSlug: string, tagSlug: string) {

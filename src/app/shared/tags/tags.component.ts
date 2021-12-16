@@ -40,13 +40,13 @@ export class TagsComponent implements OnInit {
     this.tags$ = this.tagsService.tags();
   }
 
-  addTag(tagSlug: string) {
+  tagPost(tagSlug: string) {
     const hasTag = this.hasTag(tagSlug);
     const action = hasTag ? 'untagPost' : 'tagPost';
 
-    this.postsService[action](this.post.slug, tagSlug).subscribe(
-      () => this.refreshTags.next()
-    );
+    this.postsService[action](this.post.slug, tagSlug).pipe(
+      tap(() => this.refreshTags.next())
+    ).subscribe();
   }
 
   hasTag(tagSlug: string): boolean {
@@ -59,5 +59,17 @@ export class TagsComponent implements OnInit {
 
   toggleTagMenu() {
     this.tagMenuOpen = !this.tagMenuOpen;
+  }
+
+  createTag() {
+    const tag = prompt('Tag name');
+
+    if (!tag) {
+      return;
+    }
+
+    this.tagsService.createTag(tag).pipe(
+      tap(() => this.refreshTags.next())
+    ).subscribe();
   }
 }
