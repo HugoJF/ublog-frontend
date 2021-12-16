@@ -44,10 +44,10 @@ export class PostsService {
   }
 
   tagPost(postSlug: string, tagSlug: string) {
-    return this.api.post(`/posts/${postSlug}/tag/${tagSlug}`, {});
+    return this.api.post(`/posts/${postSlug}/tags/${tagSlug}`, {});
   }
 
   untagPost(postSlug: string, tagSlug: string) {
-    return this.api.delete(`/posts/${postSlug}/tag/${tagSlug}`, {});
+    return this.api.delete(`/posts/${postSlug}/tags/${tagSlug}`, {});
   }
 }
