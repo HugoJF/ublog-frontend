@@ -10,6 +10,10 @@ import {CodemirrorModule} from "@ctrl/ngx-codemirror";
 import {ReactiveFormsModule} from "@angular/forms";
 import {TagsComponent} from "./tags/tags.component";
 import { ErrorComponent } from './error/error.component';
+import { ButtonComponent } from './button/button.component';
+import { InputComponent } from './input/input.component';
+import { TextareaComponent } from './textarea/textarea.component';
+import { InputWithPrefixComponent } from './input-with-prefix/input-with-prefix.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +23,10 @@ import { ErrorComponent } from './error/error.component';
     PostFormComponent,
     TagsComponent,
     ErrorComponent,
+    ButtonComponent,
+    InputComponent,
+    TextareaComponent,
+    InputWithPrefixComponent,
   ],
   imports: [
     CommonModule,
@@ -29,14 +37,18 @@ import { ErrorComponent } from './error/error.component';
       sanitize: SecurityContext.NONE
     }),
   ],
-    exports: [
-        MarkdownComponent,
-        FieldWrapperComponent,
-        PostListComponent,
-        PostFormComponent,
-        TagsComponent,
-        ErrorComponent,
-    ],
+  exports: [
+    MarkdownComponent,
+    FieldWrapperComponent,
+    PostListComponent,
+    PostFormComponent,
+    TagsComponent,
+    ErrorComponent,
+    ButtonComponent,
+    InputComponent,
+    TextareaComponent,
+    InputWithPrefixComponent,
+  ],
 })
 export class SharedModule {
 }

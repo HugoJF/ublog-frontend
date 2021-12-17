@@ -8,6 +8,9 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    borderRadius: {
+      DEFAULT: '8px',
+    },
     extend: {
       colors: {
         gray: colors.trueGray,
