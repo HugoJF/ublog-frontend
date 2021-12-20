@@ -6,6 +6,7 @@ import {Post} from "../../types/posts";
 import {PostsService} from "../posts.service";
 import {map, switchMap, take} from "rxjs/operators";
 import {Tag} from "../../types/tags";
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
   selector: 'app-post-view',
@@ -13,6 +14,7 @@ import {Tag} from "../../types/tags";
 })
 export class PostViewComponent implements OnInit {
   slug!: string;
+  admin!: boolean;
 
   post$!: Observable<Post>;
   versions$!: Observable<{ versions: string[] }>;
@@ -20,15 +22,17 @@ export class PostViewComponent implements OnInit {
   refetchPost = new BehaviorSubject<number>(0);
 
   constructor(
-    private http: HttpClient,
-    private route: ActivatedRoute,
-    private posts: PostsService,
-    private router: Router,
+    private readonly http: HttpClient,
+    private readonly route: ActivatedRoute,
+    private readonly posts: PostsService,
+    private readonly router: Router,
+    private readonly auth: AuthService,
   ) {
   }
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.paramMap.get('slug')!;
+    this.admin = this.auth.authed();
 
     this.route.queryParams.pipe(
       map(qs => qs['version'] ?? 0),

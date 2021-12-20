@@ -13,6 +13,7 @@ import {switchMap, tap} from "rxjs/operators";
 })
 export class TagsComponent implements OnInit {
   @Input() post!: Post;
+  @Input() showAdd = false;
 
   tagMenuOpen = false;
 

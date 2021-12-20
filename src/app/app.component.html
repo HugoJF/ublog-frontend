@@ -5,12 +5,12 @@
       <span>blog</span>
     </a>
     <ul class="flex flex-grow list-none">
-      <li
-        class="duration-150 py-6 px-6 mx-0 text-xl hover:text-white hover:bg-gray-700 cursor-pointer"
-        routerLink="/"
-      >
-        home
-      </li>
+<!--      <li-->
+<!--        class="duration-150 py-6 px-6 mx-0 text-xl hover:text-white hover:bg-gray-700 cursor-pointer"-->
+<!--        routerLink="/"-->
+<!--      >-->
+<!--        home-->
+<!--      </li>-->
       <li
         class="duration-150 py-6 px-6 mx-0 text-xl hover:text-white hover:bg-gray-700 cursor-pointer"
         routerLink="/posts"
@@ -20,6 +20,7 @@
       <li
         class="duration-150 py-6 px-6 mx-0 text-xl hover:text-white hover:bg-gray-700 cursor-pointer"
         routerLink="/admin/posts/write"
+        *ngIf="authed"
       >
         write
       </li>
