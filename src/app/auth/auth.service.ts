@@ -3,6 +3,7 @@ import {environment} from "../../environments/environment";
 import {take, tap} from "rxjs/operators";
 import {from, ReplaySubject} from "rxjs";
 import * as AmazonCognitoIdentity from "amazon-cognito-identity-js";
+import {CognitoAccessToken, CognitoUserSession} from "amazon-cognito-identity-js";
 
 const {AuthenticationDetails, CognitoUserPool, CognitoUser} = AmazonCognitoIdentity;
 
@@ -17,26 +18,28 @@ interface IAuthenticationDetailsData {
 export class AuthService {
   public readonly authChanges = new ReplaySubject<boolean>();
 
+  private readonly userPool = new CognitoUserPool({
+    UserPoolId: environment.cognitoPoolId,
+    ClientId: environment.cognitoClientId,
+  });
+
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('token_expires');
     this.authChanges.next(false);
   }
 
   login(credentials: IAuthenticationDetailsData) {
     const authenticationDetails = new AuthenticationDetails(credentials);
-    const userPool = new CognitoUserPool({
-      UserPoolId: environment.cognitoPoolId,
-      ClientId: environment.cognitoClientId,
-    });
 
     const cognitoUser = new CognitoUser({
       Username: credentials.Username,
-      Pool: userPool,
+      Pool: this.userPool,
     });
 
-    const promise = new Promise<string>(((resolve, reject) => {
+    const promise = new Promise<CognitoAccessToken>(((resolve, reject) => {
       cognitoUser.authenticateUser(authenticationDetails, {
-        onSuccess: result => resolve(result.getAccessToken().getJwtToken()),
+        onSuccess: result => resolve(result.getAccessToken()),
         onFailure: err => reject(err),
       });
     }))
@@ -52,11 +55,55 @@ export class AuthService {
     return Boolean(localStorage.getItem('token'));
   }
 
-  private handleToken(value: string) {
-    if (value) {
-      localStorage.setItem('token', value);
+  private handleToken(token: CognitoAccessToken) {
+    if (token) {
+      localStorage.setItem('token', token.getJwtToken());
+      localStorage.setItem('token_expires', token.getExpiration().toString());
     } else {
       localStorage.removeItem('token');
     }
+  }
+
+  async refreshToken() {
+    const cognitoUser = this.userPool.getCurrentUser();
+
+    if (!cognitoUser) {
+      return;
+    }
+
+    return new Promise((resolve, reject) => {
+      cognitoUser.getSession((err: null | Error, session: null | CognitoUserSession) => {
+        if (err || !session) {
+          this.logout();
+          return reject(err);
+        }
+
+        cognitoUser.refreshSession(session.getRefreshToken(), (err, result) => {
+          if (err) {
+            this.logout();
+            return reject(err);
+          }
+
+          this.handleToken(result.getRefreshToken());
+          resolve(true);
+        });
+      });
+    })
+  }
+
+  async checkExpiration() {
+    const token = localStorage.getItem('token');
+    const expires = localStorage.getItem('token_expires');
+
+    if (!token || !expires) {
+      return
+    }
+
+    const expiresDate = new Date(Number(expires));
+    if (expiresDate > new Date()) {
+      return;
+    }
+
+    await this.refreshToken();
   }
 }

@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from "./auth/auth.service";
-import {BehaviorSubject, ReplaySubject} from "rxjs";
+import {BehaviorSubject, interval, ReplaySubject} from "rxjs";
 import {takeUntil, tap} from "rxjs/operators";
 
 @Component({
@@ -22,11 +22,26 @@ export class AppComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.auth.checkExpiration();
     this.authed = this.auth.authed();
+
+    this.listenForAuthChanges();
+    this.checkTokenExpiration();
+  }
+
+  private listenForAuthChanges() {
     this.auth.authChanges.pipe(
       takeUntil(this.destroy$),
       tap(value => this.authed = value)
     ).subscribe()
+  }
+
+  private checkTokenExpiration() {
+    interval(5000)
+      .pipe(
+        takeUntil(this.destroy$),
+        tap(() => this.auth.checkExpiration())
+      ).subscribe()
   }
 }

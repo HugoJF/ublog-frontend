@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {PostsService} from "../posts.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import {iif, of} from "rxjs";
-import {map, mergeMap} from "rxjs/operators";
+import {map, mergeMap, tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-post-create',
