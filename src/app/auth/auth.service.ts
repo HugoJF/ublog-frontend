@@ -79,12 +79,12 @@ export class AuthService {
         }
 
         cognitoUser.refreshSession(session.getRefreshToken(), (err, result) => {
-          if (err) {
+          if (err || !result) {
             this.logout();
             return reject(err);
           }
 
-          this.handleToken(result.getRefreshToken());
+          this.handleToken(result.getAccessToken());
           resolve(true);
         });
       });
