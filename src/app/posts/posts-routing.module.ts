@@ -11,13 +11,7 @@ const routes: Routes = [
     path: '', component: PostsIndexComponent,
   },
   {
-    path: 'write', component: PostCreateComponent, canActivate: [AuthedOnlyGuard],
-  },
-  {
     path: ':slug', component: PostViewComponent,
-  },
-  {
-    path: ':slug/edit', component: PostEditComponent, canActivate: [AuthedOnlyGuard],
   },
 ];
 
