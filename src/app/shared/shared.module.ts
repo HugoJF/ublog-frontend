@@ -15,6 +15,7 @@ import { InputComponent } from './input/input.component';
 import { TextareaComponent } from './textarea/textarea.component';
 import { InputWithPrefixComponent } from './input-with-prefix/input-with-prefix.component';
 import { HeaderComponent } from './header/header.component';
+import { UndrawConferenceComponent } from './undraw-conference/undraw-conference.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { HeaderComponent } from './header/header.component';
     TextareaComponent,
     InputWithPrefixComponent,
     HeaderComponent,
+    UndrawConferenceComponent,
   ],
   imports: [
     CommonModule,
@@ -51,6 +53,7 @@ import { HeaderComponent } from './header/header.component';
     TextareaComponent,
     InputWithPrefixComponent,
     HeaderComponent,
+    UndrawConferenceComponent,
   ],
 })
 export class SharedModule {

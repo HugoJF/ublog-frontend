@@ -2,9 +2,13 @@
   <ng-container
     *ngIf="posts$ | async as posts"
   >
-    <h2 *ngIf="posts | empty">
-      não temos nenhum post por aqui!
-    </h2>
+    <div *ngIf="posts | empty">
+    <h2 class="mb-8 text-center text-3xl font-medium">no posts yet</h2>
+
+      <app-undraw-conference
+        class="flex w-[32rem] mx-auto"
+      ></app-undraw-conference>
+    </div>
 
     <ng-template [ngIf]="!(posts | empty)">
       <h1 class="text-4xl font-head">Posts</h1>
