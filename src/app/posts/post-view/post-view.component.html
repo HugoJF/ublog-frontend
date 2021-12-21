@@ -1,7 +1,16 @@
 <ng-container *ngIf="post$ | async as post">
-  <main class="flex flex-col items-center h-screen">
-    <router-outlet></router-outlet>
+  <main class="px-8 flex flex-col items-stretch h-screen">
     <div class="my-8">
+      <!-- Controls -->
+      <div *ngIf="authed" class="flex justify-between">
+        <div>
+          <app-button
+            [routerLink]="['/admin/posts', post.slug, 'edit']"
+          >edit</app-button>
+        </div>
+
+        <div></div>
+      </div>
       <!-- Meta -->
       <h1 class="my-0 mb-3 text-5xl text-gray-900 text-center font-head font-black tracking-wide">
         {{post.title}}
@@ -10,12 +19,12 @@
       <!-- Tags -->
       <app-tags
         [post]="post"
-        [showAdd]="admin"
+        [showAdd]="authed"
       ></app-tags>
     </div>
 
     <!-- Markdown -->
-    <div class="flex-grow px-8 w-full grid grid-cols-1">
+    <div class="flex-grow w-full grid grid-cols-1">
       <app-markdown [data]="post.body"></app-markdown>
     </div>
   </main>

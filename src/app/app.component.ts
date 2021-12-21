@@ -38,7 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private checkTokenExpiration() {
-    interval(5000)
+    interval(60000)
       .pipe(
         takeUntil(this.destroy$),
         tap(() => this.auth.checkExpiration())

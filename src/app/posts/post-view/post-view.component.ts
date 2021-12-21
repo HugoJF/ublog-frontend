@@ -14,7 +14,7 @@ import {AuthService} from "../../auth/auth.service";
 })
 export class PostViewComponent implements OnInit {
   slug!: string;
-  admin!: boolean;
+  authed!: boolean;
 
   post$!: Observable<Post>;
   versions$!: Observable<{ versions: string[] }>;
@@ -32,7 +32,7 @@ export class PostViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.paramMap.get('slug')!;
-    this.admin = this.auth.authed();
+    this.authed = this.auth.authed();
 
     this.route.queryParams.pipe(
       map(qs => qs['version'] ?? 0),

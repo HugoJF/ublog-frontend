@@ -59,8 +59,9 @@ export class AuthService {
     if (token) {
       localStorage.setItem('token', token.getJwtToken());
       localStorage.setItem('token_expires', token.getExpiration().toString());
+      this.authChanges.next(true);
     } else {
-      localStorage.removeItem('token');
+      this.logout();
     }
   }
 
@@ -99,7 +100,8 @@ export class AuthService {
       return
     }
 
-    const expiresDate = new Date(Number(expires));
+    // TODO attempt to extend token before expiration (2min)
+    const expiresDate = new Date(Number(expires) * 1000);
     if (expiresDate > new Date()) {
       return;
     }

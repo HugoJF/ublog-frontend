@@ -6,18 +6,20 @@ import {AppComponent} from './app.component';
 import {FormsModule} from '@angular/forms';
 import {CodemirrorModule} from '@ctrl/ngx-codemirror';
 import {HttpClientModule} from "@angular/common/http";
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    CodemirrorModule,
-    HttpClientModule,
-    FormsModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        CodemirrorModule,
+        HttpClientModule,
+        FormsModule,
+        SharedModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

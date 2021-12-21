@@ -1,0 +1,39 @@
+<header class="w-full bg-gray-800 text-gray-100 shadow">
+  <div class="flex justify-between items-center container mx-auto space-x-8">
+    <a class="flex px-6 text-xl font-black">
+      <span class="font-normal text-gray-200">µ</span>
+      <span>blog</span>
+    </a>
+    <ul class="flex flex-grow list-none">
+      <li
+        class="duration-150 py-6 px-6 mx-0 text-xl hover:text-white hover:bg-gray-700 cursor-pointer"
+        routerLink="/posts"
+      >
+        posts
+      </li>
+      <li
+        class="duration-150 py-6 px-6 mx-0 text-xl hover:text-white hover:bg-gray-700 cursor-pointer"
+        routerLink="/admin/posts/write"
+        *ngIf="authed"
+      >
+        write
+      </li>
+    </ul>
+    <div class="flex">
+      <a
+        class="duration-150 py-6 px-6 mx-0 text-xl hover:text-white hover:bg-gray-700 cursor-pointer"
+        routerLink="/auth/login"
+        *ngIf="!authed"
+      >
+        login
+      </a>
+      <a
+        class="duration-150 py-6 px-6 mx-0 text-xl hover:text-white hover:bg-gray-700 cursor-pointer"
+        routerLink="/auth/logout"
+        *ngIf="authed"
+      >
+        logout
+      </a>
+    </div>
+  </div>
+</header>

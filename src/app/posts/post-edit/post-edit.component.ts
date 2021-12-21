@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {PostsService} from "../posts.service";
+import {Post} from "../../types/posts";
 
 @Component({
   selector: 'app-post-edit',
@@ -34,16 +35,16 @@ export class PostEditComponent implements OnInit {
   ngOnInit(): void {
     const slug = this.route.snapshot.paramMap.get('slug')!;
 
+    this.slug.disable();
     this.posts.get(slug).subscribe(post => {
-      this.form.setValue(post);
-      // TODO: test
-      this.form.get('slug')?.disable();
+      Object.keys(this.form.controls).forEach(key => {
+        this.form.controls[key].setValue(post[key as keyof Post])
+      });
     })
-
   }
 
   submit() {
-    this.posts.store(this.form.value).subscribe(() => {
+    this.posts.store(this.form.getRawValue()).subscribe(() => {
       this.router.navigateByUrl(`/posts/${this.slug.value}`);
     });
   }

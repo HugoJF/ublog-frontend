@@ -14,6 +14,7 @@ import { ButtonComponent } from './button/button.component';
 import { InputComponent } from './input/input.component';
 import { TextareaComponent } from './textarea/textarea.component';
 import { InputWithPrefixComponent } from './input-with-prefix/input-with-prefix.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { InputWithPrefixComponent } from './input-with-prefix/input-with-prefix.
     InputComponent,
     TextareaComponent,
     InputWithPrefixComponent,
+    HeaderComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +50,7 @@ import { InputWithPrefixComponent } from './input-with-prefix/input-with-prefix.
     InputComponent,
     TextareaComponent,
     InputWithPrefixComponent,
+    HeaderComponent,
   ],
 })
 export class SharedModule {
