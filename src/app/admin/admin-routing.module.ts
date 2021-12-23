@@ -11,6 +11,9 @@ const routes: Routes = [
   {
     path: 'posts/:slug/edit', component: PostEditComponent, canActivate: [AuthedOnlyGuard],
   },
+  {
+    path: 'posts/:slug/edit/:version', component: PostEditComponent, canActivate: [AuthedOnlyGuard],
+  },
 ];
 
 @NgModule({

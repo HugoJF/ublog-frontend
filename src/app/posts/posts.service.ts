@@ -16,7 +16,7 @@ export class PostsService {
   }
 
   versions(slug: string) {
-    return this.api.get<{ versions: string[] }>(`/posts/${slug}/versions`);
+    return this.api.get<{ versions: number[] }>(`/posts/${slug}/versions`);
   }
 
   store(post: PostProperties) {

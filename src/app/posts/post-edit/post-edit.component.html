@@ -1,3 +1,7 @@
 <main class="flex flex-col h-screen">
-  <app-post-form [formGroup]="form" [onSubmit]="submit.bind(this)"></app-post-form>
+  <app-post-form
+    [versions]="versions"
+    [formGroup]="form"
+    [onSubmit]="submit.bind(this)"
+  ></app-post-form>
 </main>

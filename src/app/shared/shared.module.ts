@@ -16,6 +16,8 @@ import { TextareaComponent } from './textarea/textarea.component';
 import { InputWithPrefixComponent } from './input-with-prefix/input-with-prefix.component';
 import { HeaderComponent } from './header/header.component';
 import { UndrawConferenceComponent } from './undraw-conference/undraw-conference.component';
+import { SelectComponent } from './select/select.component';
+import {NgKeysPipeModule} from "angular-pipes";
 
 @NgModule({
   declarations: [
@@ -31,16 +33,18 @@ import { UndrawConferenceComponent } from './undraw-conference/undraw-conference
     InputWithPrefixComponent,
     HeaderComponent,
     UndrawConferenceComponent,
+    SelectComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    CodemirrorModule,
-    ReactiveFormsModule,
-    MarkdownModule.forRoot({
-      sanitize: SecurityContext.NONE
-    }),
-  ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        CodemirrorModule,
+        ReactiveFormsModule,
+        MarkdownModule.forRoot({
+            sanitize: SecurityContext.NONE
+        }),
+        NgKeysPipeModule,
+    ],
   exports: [
     MarkdownComponent,
     FieldWrapperComponent,

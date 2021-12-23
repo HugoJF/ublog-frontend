@@ -1,11 +1,27 @@
 <div class="container mx-auto flex justify-center my-8">
   <!-- Meta -->
   <div class="w-full grid grid-cols-1 space-y-4">
-    <app-input
-      [form]="control('title')"
-      class="text-3xl"
-      placeholder="Um título criativo"
-    ></app-input>
+
+    <app-select
+      *ngIf="versions.length > 0"
+      [form]="control('version')"
+      [options]="getVersions()"
+    ></app-select>
+
+    <div>
+      <app-input
+        [form]="control('title')"
+        class="text-3xl"
+        placeholder="um título criativo"
+      ></app-input>
+    </div>
+
+    <div>
+      <app-textarea
+        [form]="control('abstract')"
+        placeholder="a descrição da porra toda"
+      ></app-textarea>
+    </div>
 
     <div class="w-full flex space-x-4">
       <div class="flex-grow">

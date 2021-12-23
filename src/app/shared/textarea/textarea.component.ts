@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-textarea',
@@ -6,6 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
   host: {class: 'contents'}
 })
 export class TextareaComponent implements OnInit {
+  @Input() form!: FormControl;
   @Input() placeholder = '';
 
   constructor() { }
